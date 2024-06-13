@@ -1,5 +1,5 @@
 <?php 
-    namespace App\Modules\Auth\Models\User;
+    namespace App\Modules\Auth\Models\Customer;
     class Customer {
         private $id;
         private $name;
