@@ -1,17 +1,19 @@
 <?php 
-namespace App\Auth;
+namespace App\Modules\Auth;
 
-use Phalcon\DiInterface;
-use Phalcon\Loader;
+use Phalcon\Di\DiInterface;
+use Phalcon\Autoload\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\ModuleDefinitionInterface;
+use Phalcon\Mvc\View\Engine\Php as PhpEngine;
+use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 
 class Module implements ModuleDefinitionInterface
 {
     public function registerAutoloaders(DiInterface $di = null)
     {
         $loader = new Loader();
-        $loader->registerNamespaces([
+        $loader->setNamespaces([
             'App\Modules\Auth\Controllers' => __DIR__ . '/controllers/',
             'App\Modules\Auth\Models'      => __DIR__ . '/models/',
             'App\Modules\Auth\Models\Customer'      => __DIR__ . '/models/customer',
@@ -22,6 +24,7 @@ class Module implements ModuleDefinitionInterface
     public function registerServices(DiInterface $di)
     {
         // Register the dispatcher
+
         $di->set('dispatcher', function() {
             $dispatcher = new \Phalcon\Mvc\Dispatcher();
             $dispatcher->setDefaultNamespace('App\Modules\Auth\Controllers');
@@ -29,10 +32,44 @@ class Module implements ModuleDefinitionInterface
         });
 
         // Register the view component
-        $di->set('view', function() {
+        // $di->set('view', function() {
+        //     $view = new View();
+        //     $view->setDI($this);
+        //     $view->setViewsDir(__DIR__ . '/views/');
+        //     return $view; 
+        // });
+
+        $di->setShared('view', function () {
             $view = new View();
-            $view->setViewsDir(__DIR__ . '/views/');
+            $view->setDI($this);
+            $view->setViewsDir(APP_PATH . '/views/');
+        
+            $view->registerEngines([
+                '.volt' => function ($view) {
+                    $volt = new VoltEngine($view, $this);
+        
+                    $volt->setOptions([
+                        'always' => true,
+                        'separator' => '_',
+                        'stat' => true,
+                        'path' => function ($templatePath) {
+                            $dirName = str_replace(APP_PATH . "/", '', dirname($templatePath));
+        
+                            if (!is_dir('cache/' . $dirName)) {
+                                mkdir('cache/' . $dirName, 0777, true);
+                            }
+        
+                            return 'cache/' . $dirName . '/' . basename($templatePath) . '.php';
+                        },
+                    ]);
+        
+                    return $volt;
+                },
+                '.phtml' => PhpEngine::class
+            ]);
+        
             return $view;
         });
+        
     }
 }

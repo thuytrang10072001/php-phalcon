@@ -1,8 +1,8 @@
 <?php
 namespace App\Backend;
 
-use Phalcon\DiInterface;
-use Phalcon\Loader;
+use Phalcon\Di\DiInterface;
+use Phalcon\Autoload\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 

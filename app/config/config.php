@@ -1,10 +1,10 @@
 <?php
-use Phalcon\Config;
+use Phalcon\Config\Config;
 
 return new Config([
     'database' => [
-        'adapter'     => 'Postgresql',
-        'host'        => 'localhost',
+        'adapter'     => 'PostgreSQL',
+        'host'        => 'postgres_db',
         'username'    => 'postgres',
         'password'    => 'postgres',
         'dbname'      => 'db',

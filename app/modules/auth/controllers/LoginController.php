@@ -7,7 +7,16 @@ class LoginController extends Controller
 {
     public function indexAction(){
         // unset($_SESSION['admin']); 
+        try {
+            $this->view->pick(['auth/login']);
+        } catch (\Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+        }       
+        
+    }
 
-        $this->view->pick(['auth/login']);
+    public function loginAction(){
+        $loginInfo = $this->request->getPost();
+
     }
 }

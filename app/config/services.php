@@ -4,13 +4,13 @@
     $di->setShared('router', function () {
         $router = new Router();
 
-        $router->setDefaultModule('frontend');
+        $router->setDefaultModule('auth');
 
         $router->add('/', [
             'module'     => 'auth',
-            'controller' => 1,
-            'action'     => 2,
-            'params'     => 3,
+            'controller' => "Login",
+            'action'     => 'index',
+            'params'     => '',
         ]);
 
         $router->add('/auth/:controller/:action/:params', [
@@ -35,4 +35,23 @@
         ]);
 
         return $router;
+    });
+
+    $di->setShared('db', function () {
+        $config = $this->getConfig();
+    
+        $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
+        $params = [
+            'host'     => $config->database->host,
+            'username' => $config->database->username,
+            'password' => $config->database->password,
+            'dbname'   => $config->database->dbname,
+            'charset'  => $config->database->charset
+        ];
+    
+        if ($config->database->adapter == 'Postgresql') {
+            unset($params['charset']);
+        }
+    
+        return new $class($params);
     });
