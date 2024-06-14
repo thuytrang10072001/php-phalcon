@@ -20,13 +20,13 @@ class Repository extends Injectables
     public function checkLogin($email = null, $pass = null)
     {
         $user = $this->getDi()->get('modelsManager')->createBuilder()
-            ->from(['customer' => "App\Models\Auth\Models\Customer\Customer"])
+            ->from(['customer' => "App\Modules\Auth\Models\Customer\Customer"])
             ->columns([
                 "customer.*",
 
                 "role.name as role",
             ])
-            ->getQuery()->getSingleResult();
+            ->getQuery()->getSingleResult();    
 
 //        $user = Users::findFirst([
 //            "conditions" => "username = :username:",
