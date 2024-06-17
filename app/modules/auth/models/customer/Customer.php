@@ -6,6 +6,7 @@
         public $phone;
         public $address;
         public $email;
+        public $pass;
 
         // public function __construct($id, $name, $phone, $address, $email) {
         //     $this->id = $id;
@@ -62,6 +63,14 @@
 
         public function setEmail($email){
             $this->email = $email;
+        }
+
+        public function getPass(){
+            return $this->pass;
+        }
+
+        public function setPass($pass){
+            $this->pass = $pass;
         }
     }
 ?>

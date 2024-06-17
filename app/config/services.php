@@ -8,6 +8,8 @@
     use Phalcon\Mvc\Model\Manager as ModelsManager;
     use Phalcon\Session\Adapter\Stream as SessionAdapter;
     use Phalcon\Session\Manager as SessionManager;
+    use Phalcon\Encryption\Security;
+
 
     $loader = new Loader();
 
@@ -16,6 +18,8 @@
             'App\Config' => APP_PATH . '/config',
             'App\Modules' => APP_PATH . '/modules',
             'App\Modules\Auth\Controllers' => APP_PATH . '/modules/auth/controllers',
+            'App\Modules\Auth\Models\Customer' => APP_PATH . '/modules/auth/models/customer',
+            'App\Modules\Backend\Controllers' => APP_PATH . '/modules/backend/controllers',
         ]
     );
 
@@ -48,7 +52,7 @@
     /**
      * Register the session flash service with the Twitter Bootstrap classes
      */
-    $di->set('flash', function () {
+    $di->setShared('flash', function () {
         $escaper = new Escaper();
         $flash = new Flash($escaper);
         $flash->setImplicitFlush(false);
@@ -79,6 +83,16 @@
 
         return $session;
     });
+
+    //Register secirity to crypt and encrypt
+    // $di->setShared('security', function () {
+    //     $security = new Security();
+    
+    //     // Set the password hashing factor to 12 rounds
+    //     $security->setWorkFactor(12);
+    
+    //     return $security;
+    // });
 
     $di->set(
         "modelsManager",

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-<title>Login</title>
+<title>Sign up</title>
 
     <link
   rel="stylesheet"
@@ -30,25 +30,57 @@
   <div class="container">
     <div class="row">
       <div class="login__form d-flex flex-column align-items-center">
-        <div class="login__form--title">Login</div>
-        <?php if ($this->flashSession->has('success')) { ?>
-        <div class="alert alert-success">
-          <?= $this->flashSession->output() ?>
-        </div>
-        <?php } ?> <?php if ($this->flashSession->has('error')) { ?>
+        <div class="login__form--title">Sign Up</div>
+        <?php if ($this->flashSession->has('error')) { ?>
         <div class="alert alert-danger">
           <?= $this->flashSession->output() ?>
         </div>
         <?php } ?>
-        <form id="form-login" method="post" action="/auth/login">
+        <form id="form-login" method="post" action="/auth/signup">
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"
-              >Email address</label
-            >
+            <label for="exampleInputEmail1" class="form-label">Name</label>
             <input
-              type="email"
+              type="text"
               class="form-control"
-              id="email1"
+              id="name"
+              name="name"
+              aria-describedby="emailHelp"
+              pattern="[a-zA-Z\s]+"
+              title="Only letters and white space allowed"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Phone</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              name="phone"
+              aria-describedby="emailHelp"
+              pattern="^0\d{9,10}$"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Address</label>
+            <input
+              type="address"
+              class="form-control"
+              id="address"
+              name="address"
+              aria-describedby="emailHelp"
+              pattern="[a-zA-Z0-9\s,]+"
+              title="Only letters, numbers, commas and white space allowed"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input
+              type="address"
+              class="form-control"
+              id="email"
               name="email"
               aria-describedby="emailHelp"
               required
@@ -68,12 +100,7 @@
               title="Only letters, numbers, special @,#,_ allowed"
             />
           </div>
-          <div class="d-flex flex-column">
-            <button type="submit" class="btn btn-dark">Login</button>
-            <div style="margin-top: 10px">
-              Not have an account?<a href="/signup"> Sign up</a>
-            </div>
-          </div>
+          <button type="submit" class="btn btn-dark">Signup</button>
         </form>
       </div>
     </div>
@@ -91,7 +118,6 @@
   crossorigin="anonymous"
   referrerpolicy="no-referrer"
 ></script>
-<script src="<?= $this->url->getStatic('public/js/customer.js') ?>"></script>
 
   </body>
 </html>

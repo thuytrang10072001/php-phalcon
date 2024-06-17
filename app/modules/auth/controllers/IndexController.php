@@ -27,4 +27,16 @@
             }       
             
         }
+         /**
+         * @Get("/signup")
+         */
+        public function signUpAction(){
+            // unset($_SESSION['admin']); 
+            try {
+                $this->view->pick(['auth/signUp']);
+            } catch (\Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }       
+            
+        }
     }

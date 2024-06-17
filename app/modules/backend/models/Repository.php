@@ -21,6 +21,7 @@ class Repository extends Injectable
             ->columns([
                 "customer.*",
             ])
+            ->orderBy('customer.id')
             ->getQuery()
             ->execute();  
 
@@ -29,5 +30,19 @@ class Repository extends Injectable
        }
 
        return false;
+    }
+
+    public function getCustomerByID($id){
+        $checkCustomer = Customer::findFirst([
+            'conditions' => 'id = :id:',
+            'bind'       => [
+                'id' => $id,
+            ],
+        ]);
+
+        if($checkCustomer){
+            return $checkCustomer;
+        }
+        return false;
     }
 }

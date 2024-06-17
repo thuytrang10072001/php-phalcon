@@ -11,41 +11,61 @@ use Phalcon\Encryption\Security\Random;
 
 class Repository extends Injectable
 {
-    private $sercurity;
+    private $security;
     public function __construct()
     {
-        $this->sercurity = new Security();
+        $this->security = new Security();
+    }
+
+    public function signUp($name, $phone, $address, $email, $pass){
+        $checkEmail = Customer::findFirst([
+            'conditions' => 'email = :email:',
+            'bind'       => [
+                'email' => $email,
+            ],
+        ]);
+        if($checkEmail){
+            return -1;
+        }
+
+        $this->security->setWorkFactor(12);
+
+        $hashedPassword = $this->security->hash($pass);
+
+        $customer = new Customer();
+        $customer->name = $name;
+        $customer->phone = $phone;
+        $customer->address = $name;
+        $customer->email = $email;
+        $customer->pass = $hashedPassword;
+        $customer->save();
+
+        if ($customer) {
+            // Return success
+            return 1;
+        } else {
+            // if have error exception;
+            return 0;
+        }
     }
 
     public function checkLogin($email = null, $pass = null)
     {
-        $user = $this->getDi()->get('modelsManager')->createBuilder()
-            ->from(['customer' => "App\Modules\Auth\Models\Customer\Customer"])
-            ->columns([
-                "customer.*",
-            ])
-            ->where('customer.email = :email: AND customer.pass = :pass:', [
+        $user = Customer::findFirst([
+            'conditions' => 'email = :email:',
+            'bind'       => [
                 'email' => $email,
-                'pass' => $pass
-            ])
-            ->getQuery()
-            ->getSingleResult();  
+            ],
+        ]);
+        if(!$user){
+            return -1;
+        }
+        
 
-        if (!empty($user)) {
-            return $user;
-        //    $passwordCheck = $password . $user->user->salt_key;
-
-        //    if ($this->sercurity->checkHash($passwordCheck, $user->user->password)) {
-        //        $userReturn = $user->user->toArray();
-        //        unset($userReturn["password"]);
-        //        unset($userReturn["salt_key"]);
-        //        unset($userReturn["created_date"]);
-        //        unset($userReturn["updated_date"]);
-        //        $userReturn["role"] = $user->role;
-        //        return $userReturn;
-        //    }
-       }
-
-       return false;
+        if($this->security->checkHash($pass, $user->pass)){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

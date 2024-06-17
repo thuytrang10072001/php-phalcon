@@ -10,3 +10,4 @@
   crossorigin="anonymous"
   referrerpolicy="no-referrer"
 ></script>
+<script src="<?= $this->url->getStatic('public/js/customer.js') ?>"></script>
