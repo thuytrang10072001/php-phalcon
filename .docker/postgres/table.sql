@@ -20,54 +20,54 @@ VALUES (
         '0912341212',
         'New York City',
         'john.doe@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     ),
     (
         'Jane Smith',
         '0912341212',
         'Francisco City',
         'jane.smith@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     ),
     (
         'Anna Kenrick',
         '0912341212',
         'Washington Capital',
         'anna.kenrick@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     ),
     (
         'Taylor Swift',
         '0912341212',
         'Miami State',
         'taylor.swift@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     ),
     (
         'Charlie Puth',
         '0912341212',
         'Boston Celtic State',
         'charlie.puth@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     ),
     (
         'Kim Taeyeon',
         '0912341212',
         'Jeonju',
         'kim.taeyeon@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     ),
     (
         'Im Yoona',
         '0912341212',
         'DaerimDong',
         'im.yoona@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     ),
     (
         'Sunny',
         '0912341212',
         'California',
         'sunny@example.com',
-        '$2y$10$I9EdS4EsvQ6R.jRYLcXsIelSnRpfpZWkNzdHZZddGW6ZxhTfTaQGO'
+        '123456'
     );

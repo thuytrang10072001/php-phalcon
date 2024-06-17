@@ -1,4 +1,8 @@
-{% extends 'layout.volt' %} {% block content %}
+{% extends 'layout.volt' %} 
+{% block title%}
+<title>Login</title>
+{% endblock %}
+{% block content %}
 <section class="login d-flex align-items-center">
   <div class="container">
     <div class="row">

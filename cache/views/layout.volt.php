@@ -1,9 +1,9 @@
-a:3:{i:0;s:814:"<!DOCTYPE html>
+a:5:{i:0;s:152:"<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    ";s:5:"title";a:1:{i:0;a:4:{s:4:"type";i:357;s:5:"value";s:1:" ";s:4:"file";s:35:"/var/www/html/app/views/layout.volt";s:4:"line";i:6;}}i:1;s:642:"
     <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -23,7 +23,7 @@ a:3:{i:0;s:814:"<!DOCTYPE html>
   </head>
 
   <body>
-    ";s:7:"content";N;i:1;s:497:" <script
+    ";s:7:"content";N;i:2;s:497:" <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
   crossorigin="anonymous"

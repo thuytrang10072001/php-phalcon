@@ -9,7 +9,7 @@ use Phalcon\Encryption\Security;
 use Phalcon\Encryption\Security\Random;
 
 
-class Repository extends Injectables
+class Repository extends Injectable
 {
     private $sercurity;
     public function __construct()
@@ -23,32 +23,27 @@ class Repository extends Injectables
             ->from(['customer' => "App\Modules\Auth\Models\Customer\Customer"])
             ->columns([
                 "customer.*",
-
-                "role.name as role",
             ])
-            ->getQuery()->getSingleResult();    
-
-//        $user = Users::findFirst([
-//            "conditions" => "username = :username:",
-//            "bind" => [
-//                "username" => $username,
-//            ],
-//            "join" =>
-////        ]);
+            ->where('customer.email = :email: AND customer.pass = :pass:', [
+                'email' => $email,
+                'pass' => $pass
+            ])
+            ->getQuery()
+            ->getSingleResult();  
 
         if (!empty($user)) {
+            return $user;
+        //    $passwordCheck = $password . $user->user->salt_key;
 
-           $passwordCheck = $password . $user->user->salt_key;
-
-           if ($this->sercurity->checkHash($passwordCheck, $user->user->password)) {
-               $userReturn = $user->user->toArray();
-               unset($userReturn["password"]);
-               unset($userReturn["salt_key"]);
-               unset($userReturn["created_date"]);
-               unset($userReturn["updated_date"]);
-               $userReturn["role"] = $user->role;
-               return $userReturn;
-           }
+        //    if ($this->sercurity->checkHash($passwordCheck, $user->user->password)) {
+        //        $userReturn = $user->user->toArray();
+        //        unset($userReturn["password"]);
+        //        unset($userReturn["salt_key"]);
+        //        unset($userReturn["created_date"]);
+        //        unset($userReturn["updated_date"]);
+        //        $userReturn["role"] = $user->role;
+        //        return $userReturn;
+        //    }
        }
 
        return false;

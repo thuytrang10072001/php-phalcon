@@ -7,6 +7,8 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
+use Phalcon\Mvc\Model\Manager as ModelsManager;
+use App\Modules\Auth\Models\Customer\Repository;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -70,6 +72,20 @@ class Module implements ModuleDefinitionInterface
         
             return $view;
         });
+
+        $di->set(
+            "modelsManager",
+            function() {
+                return new ModelsManager();
+            }
+        );
+
+        $di->setShared(
+            "authRepo",
+            function (){
+                return new Repository();
+            }
+        );
         
     }
 }

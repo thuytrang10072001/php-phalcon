@@ -55,8 +55,11 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
-COPY ./app/cache /var/www/html/app/cache
-RUN chmod -R 777 /var/www/html/app/cache
+COPY ./cache /var/www/html/cache
+RUN chmod -R 777 /var/www/html/cache
+
+COPY ./app/tmp /var/www/html/app/tmp
+RUN chmod -R 777 /var/www/html/app/tmp
 # Expose ports
 EXPOSE 80 443
 

@@ -1,18 +1,24 @@
 <?php 
     namespace App\Modules\Auth\Models\Customer;
-    class Customer {
-        private $id;
-        private $name;
-        private $phone;
-        private $address;
-        private $email;
+    class Customer extends \Phalcon\Mvc\Model{
+        public $id;
+        public $name;
+        public $phone;
+        public $address;
+        public $email;
 
-        public function __construct($id, $name, $phone, $address, $email) {
-            $this->id = $id;
-            $this->name = $name;
-            $this->phone = $phone;
-            $this->address = $address;
-            $this->email = $email;
+        // public function __construct($id, $name, $phone, $address, $email) {
+        //     $this->id = $id;
+        //     $this->name = $name;
+        //     $this->phone = $phone;
+        //     $this->address = $address;
+        //     $this->email = $email;
+        // }
+
+        public function initialize()
+        {
+            // Define the table associated with the model if it's different from the default naming convention
+            $this->setSource('customer'); // Assuming your table name is 'customers'
         }
 
         public function insert($name, $phone, $address, $email) {
