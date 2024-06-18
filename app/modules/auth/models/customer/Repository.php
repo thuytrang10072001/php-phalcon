@@ -35,7 +35,7 @@ class Repository extends Injectable
         $customer = new Customer();
         $customer->name = $name;
         $customer->phone = $phone;
-        $customer->address = $name;
+        $customer->address = $address;
         $customer->email = $email;
         $customer->pass = $hashedPassword;
         $customer->save();

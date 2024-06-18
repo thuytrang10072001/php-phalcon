@@ -43,6 +43,16 @@
       >
         Add <i class="fa-solid fa-plus"></i>
       </button>
+      <?php if ($this->flashSession->has('success')) { ?>
+      <div class="alert alert-success">
+        <?= $this->flashSession->output() ?>
+      </div>
+      <?php } ?> 
+      <?php if ($this->flashSession->has('error')) { ?>
+        <div class="alert alert-danger">
+          <?= $this->flashSession->output() ?>
+        </div>
+      <?php } ?>
       <button onclick="logOut()" type="button" class="btn btn-dark btn-log-out">
         Log out
       </button>
@@ -122,7 +132,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form method="post" id="form" action="/customer/insert">
+        <form method="post" id="form" action="/admin/customer/insert">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Name:</label>
             <input

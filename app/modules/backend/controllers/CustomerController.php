@@ -34,6 +34,7 @@ class CustomerController extends Controller
        
     }
 
+
     /**
      * @Get('/show/{id:[0-9]+}')
      * 
@@ -53,5 +54,33 @@ class CustomerController extends Controller
                 $this->view->pick(['backend/customer/show']);
             }
         }        
+    }
+
+    /**
+     * @Route('/insert', methods={'POST'})
+     * 
+     * @property Session $flashSession
+     */
+    public function insertAction(){
+        if(!isset($this->session->user)){
+            $this->response->redirect('/');
+        }else{
+            $name = $this->request->getPost("name");
+            $phone = $this->request->getPost('phone');
+            $address = $this->request->getPost('address');
+            $email = $this->request->getPost('email');
+            
+            $insertResult = $this->beRepo->insertCustomer($name, $phone, $address, $email);
+
+            if($insertResult == 1){
+                $this->flashSession->success('Insert customer success!');
+            }else if ($insertResult == -1) {
+                $this->flashSession->error("Email exists!");
+            } else {
+                $this->flashSession->error('Insert failed. Please try again.');
+            }
+            $this->response->redirect('/admin/customer/list');
+
+        }
     }
 }

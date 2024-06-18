@@ -4,14 +4,17 @@ namespace App\Modules\Backend\Models;
 
 use App\Models\Users;
 use App\Modules\Auth\Models\Customer\Customer;
+use Phalcon\Encryption\Security;
 use Phalcon\Di\Injectable;
 
 
 
 class Repository extends Injectable
 {
+    private $security;
     public function __construct()
     {
+        $this->security = new Security();
     }
 
     public function getList()
@@ -44,5 +47,35 @@ class Repository extends Injectable
             return $checkCustomer;
         }
         return false;
+    }
+
+    public function insertCustomer($name, $phone, $address, $email){
+        $checkCustomer = Customer::findFirst([
+            'conditions' => 'email = :email:',
+            'bind'       => [
+                'email' => $email,
+            ],
+        ]);
+
+        if($checkCustomer){
+            return -1;
+        }
+
+        $pass = $this->security->hash('123456');
+
+        $customer = new Customer();
+        $customer->name = $name;
+        $customer->phone = $phone;
+        $customer->address = $address;
+        $customer->email = $email;
+        $customer->pass = $pass;
+        $customer->save();
+
+        if($customer){
+            return 1;
+        }else{
+            return 0;
+        }
+
     }
 }
