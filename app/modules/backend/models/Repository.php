@@ -6,6 +6,7 @@ use App\Models\Users;
 use App\Modules\Auth\Models\Customer\Customer;
 use Phalcon\Encryption\Security;
 use Phalcon\Di\Injectable;
+use Exception;
 
 
 
@@ -49,6 +50,21 @@ class Repository extends Injectable
         return false;
     }
 
+    public function getCustomerByEmailDifId($id, $email){
+        $checkCustomer = Customer::findFirst([
+            'conditions' => 'id != :id: AND email = :email:',
+            'bind'       => [
+                'id' => $id,
+                'email' => $email,
+            ],
+        ]);
+
+        if($checkCustomer){
+            return $checkCustomer;
+        }
+        return false;
+    }
+
     public function insertCustomer($name, $phone, $address, $email){
         $checkCustomer = Customer::findFirst([
             'conditions' => 'email = :email:',
@@ -77,5 +93,64 @@ class Repository extends Injectable
             return 0;
         }
 
+    }
+
+    public function updateCustomer($id, $data){
+        $this->db->begin();
+        try{
+            $checkCustomer = $this->getCustomerByEmailDifId($id, $data['email']);
+            if($checkCustomer){
+
+                return -1;
+            }else{
+                $find = Customer::findFirst([
+                    'conditions' => 'id = :id:',
+                    'bind'       => [
+                        'id' => $id,
+                    ],
+                ]);
+        
+                if($find){
+                    $find->name = $data['name'];
+                    $find->phone = $data['phone'];
+                    $find->address = $data['address'];
+                    $find->email = $data['email'];
+                    $result = $find->update();
+                    if($result){
+                        $this->db->commit();
+                        return 1;
+                    }
+                }
+            }
+    
+        }catch(Exception $ex){
+            $this->db->rollback();
+            throw new Exception($ex->getMessage());
+            return 0;
+        }
+    }
+
+    public function deleteCustomer($id){
+        $this->db->begin();
+
+        try{
+            $customer = $this->getCustomerByID($id);
+
+            if(!$customer){
+                return -1;
+            }else{
+                $result = $customer->delete();
+                if($result){
+                    $this->db->commit();
+                    return 1; 
+                }
+            }
+
+        }catch(Exception $ex){
+            $this->db->rollback();
+            throw new Exception($ex->getMessage());
+            return 0;
+        }
+        
     }
 }

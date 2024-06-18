@@ -22,11 +22,10 @@
       <div class="alert alert-success">
         {{ flashSession.output() }}
       </div>
-      {% endif %} 
-      {% if flashSession.has('error') %}
-        <div class="alert alert-danger">
-          {{ flashSession.output() }}
-        </div>
+      {% endif %} {% if flashSession.has('error') %}
+      <div class="alert alert-danger">
+        {{ flashSession.output() }}
+      </div>
       {% endif %}
       <button onclick="logOut()" type="button" class="btn btn-dark btn-log-out">
         Log out
@@ -190,8 +189,8 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form method="post" id="form" action="/customer/update">
-          <div class="mb-3 show-id">
+        <form method="post" id="formUpdate">
+          <!-- <div class="mb-3 show-id">
             <label for="recipient-name" class="col-form-label">ID:</label>
             <input
               type="text"
@@ -200,7 +199,7 @@
               name="id"
               readonly
             />
-          </div>
+          </div> -->
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Name:</label>
             <input
@@ -285,7 +284,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form method="post" id="formDelete" action="/customer/delete">
+        <form method="get" id="formDelete">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">ID:</label>
             <input
@@ -293,17 +292,19 @@
               class="form-control"
               id="idDelete"
               name="idDelete"
-              readonly
+              disabled
             />
           </div>
           <div class="mb-3 show-id">
-            <label for="recipient-name" class="col-form-label">ID:</label>
+            <label for="recipient-name" class="col-form-label" disabled
+              >Name:</label
+            >
             <input
               type="text"
               class="form-control"
               id="nameDelete"
               name="nameDelete"
-              readonly
+              disabled
             />
           </div>
           <div class="modal-footer">

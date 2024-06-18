@@ -9,12 +9,14 @@ $(document).ready(() => {
     });
   
     $(".btn-update").on("click", function (event) {
-      $("#id").val(this.getAttribute("data-id"));
+      const customerId = this.getAttribute("data-id");
+
       $("#nameUpdate").val(this.getAttribute("data-name"));
       $("#phoneUpdate").val(this.getAttribute("data-phone"));
       $("#addressUpdate").val(this.getAttribute("data-address"));
       $("#emailUpdate").val(this.getAttribute("data-email"));
 
+      $('#formUpdate').attr('action', '/admin/customer/update/' + customerId);
     });
   
     $(".btn-add").on("click", function (event) {
@@ -25,7 +27,11 @@ $(document).ready(() => {
     });
   
     $(".btn-delete").on("click", function (event) {
-      $("#idDelete").val(this.getAttribute("data-id"));
+      const customerId = this.getAttribute("data-id");
+
+      $("#idDelete").val(customerId);
       $("#nameDelete").val(this.getAttribute("data-name"));
+
+      $('#formDelete').attr('action', '/admin/customer/delete/' + customerId);
     });
   });

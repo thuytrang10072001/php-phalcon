@@ -44,8 +44,11 @@ class CustomerController extends Controller
     {
         if(!isset($this->session->user)){
             $this->response->redirect('/');
+            //$this->view->pick(['error/403Error']);
         }else{
+
             $customer = $this->beRepo->getCustomerByID($id);
+
             if(!$customer){
                 $this->flashSession->error("Customer not exists!");
                 $this->response->redirect('/admin/customer/list');
@@ -65,6 +68,7 @@ class CustomerController extends Controller
         if(!isset($this->session->user)){
             $this->response->redirect('/');
         }else{
+
             $name = $this->request->getPost("name");
             $phone = $this->request->getPost('phone');
             $address = $this->request->getPost('address');
@@ -77,10 +81,39 @@ class CustomerController extends Controller
             }else if ($insertResult == -1) {
                 $this->flashSession->error("Email exists!");
             } else {
-                $this->flashSession->error('Insert failed. Please try again.');
+                $this->flashSession->error('Insert failed. Please try again!');
             }
+
             $this->response->redirect('/admin/customer/list');
 
+        }
+    }
+
+     /**    
+     * @Route('/delete/{id:[0-9]+}', methods={'GET'})
+     *
+     * @property Session $flashSession 
+     */
+    public function updateAction($id){
+        if(!isset($this->session->user)){
+
+            $this->response->redirect('/');
+
+        }else{
+            $updateResult = $this->beRepo->deleteCustomer($id);
+
+            if($updateResult == 1){
+                $this->flashSession->success('Delete customer success!');
+
+            }else if($updateResult == -1){
+                $this->flashSession->error('Customer not exists!');
+            
+            }else{
+                $this->flashSession->error('Delete failed. Please try again!');
+            
+            }
+
+            $this->response->redirect('/admin/customer/list');
         }
     }
 }

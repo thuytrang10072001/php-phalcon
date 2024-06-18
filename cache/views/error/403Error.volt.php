@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-<title>Detail Customer</title>
-
+     <title>403 Not Found</title>
     <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -26,28 +24,42 @@
 
   <body>
     
-<section class="customer__detail">
-  <span class="customer__title">Information Detail</span>
-  <div class="customer__detail--info">
-    ID:
-    <span id="id" class=""><?= $customer->id ?></span
-    ><br /><br />
-    Name:
-    <span id="name" class=""><?= $customer->name ?></span
-    ><br /><br />
-    Phone:
-    <span id="phone" class=""><?= $customer->phone ?></span
-    ><br /><br />
-    Address:
-    <span id="address"><?= $customer->address ?></span
-    ><br /><br />
-    Email: <span id="email"><?= $customer->email ?></span
-    ><br /><br />
+
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+  <div
+    class="content-wrapper d-flex align-items-center text-center error-page bg-primary"
+  >
+    <div class="row flex-grow">
+      <div class="col-lg-7 mx-auto text-white">
+        <div class="row align-items-center d-flex flex-row">
+          <div class="col-lg-6 text-lg-right pr-lg-4">
+            <h1 class="display-1 mb-0">403</h1>
+          </div>
+          <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
+            <h2>PERMISSION DENIED!</h2>
+            <h3 class="font-weight-light">
+              You are not allowed to access this page.
+            </h3>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 text-center mt-xl-2">
+            <a class="text-white font-weight-medium" href="#">Back to home</a>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 mt-xl-2">
+            <p class="text-white font-weight-medium text-center">
+              Copyright &copy; 2021 All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <button class="btn btn-dark btn-back">
-    <i class="fa-solid fa-left-long"></i> Back
-  </button>
-</section>
+  <!-- content-wrapper ends -->
+</div>
+
  <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
