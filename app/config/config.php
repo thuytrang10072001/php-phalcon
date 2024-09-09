@@ -9,6 +9,7 @@ return new Config([
         'password'    => 'postgres',
         'dbname'      => 'db',
         'charset'     => 'utf8',
+        // 'port'        =>  '5433',
     ],
     'application' => [
         'controllersDir' => APP_PATH . '/controllers/',

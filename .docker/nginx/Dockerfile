@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
     libmemcached-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install phalcon
+RUN pecl install phalcon-5.7.0
 
 # Enable Phalcon extension
 RUN echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/50-phalcon.ini

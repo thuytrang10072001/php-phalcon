@@ -46,7 +46,7 @@ VALUES (
     (
         'Charlie Puth',
         '0912341212',
-        'Boston Celtic State',
+        '   ',
         'charlie.puth@example.com',
         '$2y$12$ZP/ZWAQqgO2riNcKsuF9VueAqKoXquVoRiVreng2Ch888l1IpW.aS'
     ),

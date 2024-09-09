@@ -1,5 +1,7 @@
 <?php 
+    
     namespace App\Modules\Auth\Models\Customer;
+
     class Customer extends \Phalcon\Mvc\Model{
         public $id;
         public $name;

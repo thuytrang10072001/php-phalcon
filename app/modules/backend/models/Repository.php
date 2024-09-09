@@ -116,15 +116,16 @@ class Repository extends Injectable
                     $find->address = $data['address'];
                     $find->email = $data['email'];
                     $result = $find->update();
-                    if($result){
-                        $this->db->commit();
-                        return 1;
+                    if(!$result){
+                        $this->db->rollback();
+                        return 0;
                     }
+                    $this->db->commit();
+                    return 1;
                 }
             }
     
         }catch(Exception $ex){
-            $this->db->rollback();
             throw new Exception($ex->getMessage());
             return 0;
         }
@@ -140,14 +141,15 @@ class Repository extends Injectable
                 return -1;
             }else{
                 $result = $customer->delete();
-                if($result){
-                    $this->db->commit();
-                    return 1; 
+                if(!$result){
+                    $this->db->rollback();
+                    return 0; 
                 }
+                $this->db->commit();
+                return 1;
             }
 
         }catch(Exception $ex){
-            $this->db->rollback();
             throw new Exception($ex->getMessage());
             return 0;
         }
